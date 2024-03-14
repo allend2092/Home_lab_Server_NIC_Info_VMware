@@ -1,0 +1,146 @@
+Model:	PowerEdge R630
+Processor Type:	Intel(R) Xeon(R) CPU E5-2660 v3 @ 2.60GHz
+Logical Processors:	40
+NICs:	4
+
+[root@esxi2:~] esxcli network nic list
+Name    PCI Device    Driver  Admin Status  Link Status  Speed  Duplex  MAC Address         MTU  Description
+------  ------------  ------  ------------  -----------  -----  ------  -----------------  ----  -----------
+vmnic0  0000:01:00.0  ntg3    Up            Up            1000  Full    f8:bc:12:34:d9:e8  9000  Broadcom Corporation NetXtreme BCM5720 Gigabit Ethernet
+vmnic1  0000:01:00.1  ntg3    Up            Up            1000  Full    f8:bc:12:34:d9:e9  9000  Broadcom Corporation NetXtreme BCM5720 Gigabit Ethernet
+vmnic2  0000:02:00.0  ntg3    Up            Up            1000  Full    f8:bc:12:34:d9:ea  9000  Broadcom Corporation NetXtreme BCM5720 Gigabit Ethernet
+vmnic3  0000:02:00.1  ntg3    Up            Up            1000  Full    f8:bc:12:34:d9:eb  1500  Broadcom Corporation NetXtreme BCM5720 Gigabit Ethernet
+
+
+[root@esxi2:~] vmkchdev -l | grep vmnic
+0000:01:00.0 14e4:165f 1028:1f5b vmkernel vmnic0
+0000:01:00.1 14e4:165f 1028:1f5b vmkernel vmnic1
+0000:02:00.0 14e4:165f 1028:1f5b vmkernel vmnic2
+0000:02:00.1 14e4:165f 1028:1f5b vmkernel vmnic3
+
+https://www.vmware.com/resources/compatibility/search.php?deviceCategory=io&details=1&releases=578,518,508,448&VID=14e4&DID=165f&SVID=1028&SSID=1f5b&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc
+
+
+https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=io&productid=37809&releaseid=518&deviceCategory=io&details=1&releases=578,518,508,448&VID=14e4&DID=165f&SVID=1028&SSID=1f5b&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc
+
+Driver: ntg3
+Version: 4.1.5.0
+
+Firmware Version: bc 1.39 ncsi 1.5.27.0
+
+[root@esxi2:~] vmware -vl
+VMware ESXi 7.0.2 build-18426014
+VMware ESXi 7.0 Update 2
+
+
+[root@esxi2:~] esxcli network nic get -n vmnic0
+   Advertised Auto Negotiation: true
+   Advertised Link Modes: Auto, 1000BaseT/Full, 100BaseT/Half, 100BaseT/Full, 10BaseT/Half, 10BaseT/Full
+   Auto Negotiation: true
+   Cable Type: Twisted Pair
+   Current Message Level: 7
+   Driver Info:
+         Bus Info: 0000:01:00:0
+         Driver: ntg3
+         Firmware Version: bc 1.39 ncsi 1.5.27.0
+         Version: 4.1.5.0
+   Link Detected: true
+   Link Status: Up
+   Name: vmnic0
+   PHYAddress: 0
+   Pause Autonegotiate: true
+   Pause RX: true
+   Pause TX: true
+   Supported Ports: TP
+   Supports Auto Negotiation: true
+   Supports Pause: true
+   Supports Wakeon: true
+   Transceiver: internal
+   Virtual Address: 00:50:56:51:5a:5d
+   Wakeon: Disabled
+[root@esxi2:~] esxcli network nic get -n vmnic1
+   Advertised Auto Negotiation: true
+   Advertised Link Modes: Auto, 1000BaseT/Full, 100BaseT/Half, 100BaseT/Full, 10BaseT/Half, 10BaseT/Full
+   Auto Negotiation: true
+   Cable Type: Twisted Pair
+   Current Message Level: 7
+   Driver Info:
+         Bus Info: 0000:01:00:1
+         Driver: ntg3
+         Firmware Version: bc 1.39 ncsi 1.5.27.0
+         Version: 4.1.5.0
+   Link Detected: true
+   Link Status: Up
+   Name: vmnic1
+   PHYAddress: 0
+   Pause Autonegotiate: true
+   Pause RX: true
+   Pause TX: true
+   Supported Ports: TP
+   Supports Auto Negotiation: true
+   Supports Pause: true
+   Supports Wakeon: true
+   Transceiver: internal
+   Virtual Address: 00:50:56:59:53:94
+   Wakeon: Disabled
+[root@esxi2:~] esxcli network nic get -n vmnic2
+   Advertised Auto Negotiation: true
+   Advertised Link Modes: Auto, 1000BaseT/Full, 100BaseT/Half, 100BaseT/Full, 10BaseT/Half, 10BaseT/Full
+   Auto Negotiation: true
+   Cable Type: Twisted Pair
+   Current Message Level: 7
+   Driver Info:
+         Bus Info: 0000:02:00:0
+         Driver: ntg3
+         Firmware Version: bc 1.39 ncsi 1.5.27.0
+         Version: 4.1.5.0
+   Link Detected: true
+   Link Status: Up
+   Name: vmnic2
+   PHYAddress: 0
+   Pause Autonegotiate: true
+   Pause RX: true
+   Pause TX: true
+   Supported Ports: TP
+   Supports Auto Negotiation: true
+   Supports Pause: true
+   Supports Wakeon: true
+   Transceiver: internal
+   Virtual Address: 00:50:56:56:d2:b5
+   Wakeon: Disabled
+[root@esxi2:~] esxcli network nic get -n vmnic3
+   Advertised Auto Negotiation: true
+   Advertised Link Modes: Auto, 1000BaseT/Full, 100BaseT/Half, 100BaseT/Full, 10BaseT/Half, 10BaseT/Full
+   Auto Negotiation: true
+   Cable Type: Twisted Pair
+   Current Message Level: 7
+   Driver Info:
+         Bus Info: 0000:02:00:1
+         Driver: ntg3
+         Firmware Version: bc 1.39 ncsi 1.5.27.0
+         Version: 4.1.5.0
+   Link Detected: true
+   Link Status: Up
+   Name: vmnic3
+   PHYAddress: 0
+   Pause Autonegotiate: true
+   Pause RX: true
+   Pause TX: true
+   Supported Ports: TP
+   Supports Auto Negotiation: true
+   Supports Pause: true
+   Supports Wakeon: true
+   Transceiver: internal
+   Virtual Address: 00:50:56:5e:85:24
+   Wakeon: Disabled
+
+
+
+
+
+
+
+
+
+
+
